@@ -1,0 +1,139 @@
+---
+title: "Reporte Viviendas"
+author: "Pablo Busch Hopfenblatt"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output: 
+  powerpoint_presentation:
+    slide_level: 2 # use this to override default (# es seccion, ## nueva slide)
+    reference_doc: FormatoReporte.pptx
+params:
+  barrio: ! NA
+  viv: !r c("sitio", "parcela", "terreno-en-construccion")
+---
+
+```{r opciones de cada chunk de código, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, dpi=300,
+                      ft.left=2.5)
+```
+
+```{r Librerías/Paquetes, include = FALSE}
+source("Scripts/00-CargaLibrerias.R", encoding = "UTF-8")
+```
+
+```{r load Data}
+# esto facilita la imrpesion masiva
+barrio <- params$barrio %>% as.character()
+viv <- params$viv %>% as.character()
+source("Scripts/04-load_data.R", encoding = "UTF-8")
+```
+
+```{r feat Data Analisis mapa}
+source("Scripts/data_wrangling_terreno.R", encoding = "UTF-8")
+```
+
+```{r opciones digitos}
+options(digits = 1, OutDec = ".")
+```
+
+## Descripción
+
+- Fecha descarga datos: **`r df$fecha_consulta[1] %>% format('%d-%m-%Y')`**
+- Datos de venta de terrenos en Aysen:
+- Total de datos válidos levantados: **`r nrow(df)`**
+- Fuente: *https://www.portalinmobiliario.com/*
+
+## Notas
+
+- Esta presentación fue generada automaticamente
+- Interesa mostrar la totalidad de los datos recolectados, para resaltar ofertas puntuales que pueden ser convenientes
+- Dado lo anterior se opto en su mayoria por visualizar los datos en gráficos de Scatter
+
+# TABLAS RESUMEN
+
+## Precios según Sector [UF]
+```{r tabla precio}
+tabla_precio %>% rename(Sector=barrio) %>% 
+  flextable() %>% 
+  colformat_num(big.mark=" ", digits=0, j=colnames(tabla_precio)[2:5]) %>% 
+  fontsize(size = 14, part = "all") %>% 
+  bold(j=1, bold=T) %>% bold(bold=T, part="header") %>% 
+  autofit(add_w = 0.3, add_h = 0.1)
+```
+
+## Superficie Total [ha] según Sector
+```{r tabla superficie}
+tabla_sup %>% rename(Sector=barrio) %>% 
+  flextable() %>% 
+  colformat_num(big.mark=" ", digits=0, j=colnames(tabla_sup)[2:5]) %>%
+  fontsize(size = 14, part = "all") %>% 
+  bold(j=1, bold=T) %>% bold(bold=T, part="header") %>% 
+  autofit(add_w = 0.3, add_h = 0.15)
+```
+
+## Precio por hect[area] según Sector [UF/ha]
+```{r tabla precio area}
+tabla_preciosup %>% rename(Sector=barrio) %>% 
+  flextable() %>% 
+  colformat_num(big.mark=" ", digits=0, j=colnames(tabla_preciosup)[2:5]) %>%
+  fontsize(size = 14, part = "all") %>% 
+  bold(j=1, bold=T) %>% bold(bold=T, part="header") %>% 
+  autofit(add_w = 0.3, add_h = 0.15)
+```
+
+# DISTRIBUCIÓN DATOS
+
+## Ubicación Terrenos
+```{r mapa all}
+m
+```
+
+## Boxplot Precio [UF]
+```{r boxplot }
+boxplot
+```
+
+## Precio de Viviendas [UF]
+```{r jitter}
+jitter
+```
+
+## ECDF Precio [UF]
+```{r CDF}
+ecdf
+```
+
+# RELACIÓN ENTRE VARIABLES
+
+## Precio [UF] vs Superficie Total [ha]
+```{r scatter}
+scatter
+```
+
+## Precio [UF] vs Superficie Total [ha] bajo 10K UF
+```{r scatter interes}
+scatter_interes
+```
+
+# ANALISIS PRECIO POR AREA [UF/ha]
+
+## Boxplot UF/ha
+
+```{r Boxplot precio}
+boxplot_precio
+```
+
+## UF/ha vs Superficie Total [ha]
+```{r scatter precio por area, fig.cap="Tamaño representa un menor costo de UF por área"}
+scatter_precio
+```
+
+## UF/ha vs Superficie Total [ha] bajo 10K UF
+```{r, fig.cap="Tamaño representa un menor costo de UF por área"}
+scatter_precio_interes
+```
+
+## Ubicación 15 mejores Viviendas según precio por área
+```{r}
+m_15
+```
+
