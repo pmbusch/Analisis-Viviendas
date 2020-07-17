@@ -5,6 +5,7 @@
 
 
 source("Scripts/00-Funciones.R")
+source("Scripts/00-CargaLibrerias.R")
 source("Scripts/01-f_scrap_viv.R")
 source("Scripts/02-f_scrap_barrio.R")
 
