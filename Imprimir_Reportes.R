@@ -1,19 +1,16 @@
 ## Script para imprimir reportes
 ## PBH Jul 2020
 
+# Imprimir reporte individual
+rmarkdown::render("Reporte_Viviendas.Rmd",
+                  params = list(viv = "casa",
+                                barrio="Coquimbo"),
+                  output_file = paste("Reportes/Reporte", "Coquimbo","casa", sep="_"))
+
+
 # Valores que se usarán como "parámetros" (variables) del reporte
 barrios <- c("PlazaÑuñoa", "Valdivia")
 viviendas <- c("casa", "departamento")
-
-b <- "PlazaÑuñoa"
-v <- "departamento"
-
-
-# Imprimir reporte individual
-rmarkdown::render("Reporte_Viviendas.Rmd",
-                  params = list(viv = v,
-                                barrio=b),
-                  output_file = paste("Reportes/Reporte", b,v, sep="_"))
 
 # Definir función para generación de reportes
 for (b in barrios){

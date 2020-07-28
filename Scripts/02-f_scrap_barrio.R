@@ -72,7 +72,10 @@ f.scrap.barrio <- function(barrio,venta=True,tipo_vivienda){
     dir_url <- dir_url[!(str_detect(dir_url,"BB:[1-9]"))]
     
     for (url_depto in dir_url){
-      df <- rbind(df,f.scrap.viv(url_depto,barrio,venta_arriendo,tipo_vivienda))
+      tryCatch(
+        {
+          df <- rbind(df,f.scrap.viv(url_depto,barrio,venta_arriendo,tipo_vivienda))
+        }, error = function(cond) return(NULL) )
       }
     
   }

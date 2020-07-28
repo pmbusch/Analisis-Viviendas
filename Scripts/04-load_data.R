@@ -20,7 +20,8 @@ if (barrio!="NA"){
   dicc_barrios <- tribble(
     ~barrio_nom, ~codigo_barrio,
     "PlazaÑuñoa", "plaza-nunoa-santiago-metropolitana", 
-    "Valdivia","valdivia-de-los-rios")
+    "Valdivia","valdivia-de-los-rios",
+    "Coquimbo","coquimbo-coquimbo")
   
   
   codigo_barrio <- dicc_barrios %>% filter(barrio_nom==barrio) %>% pull(codigo_barrio)

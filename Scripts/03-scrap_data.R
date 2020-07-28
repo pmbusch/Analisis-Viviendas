@@ -49,9 +49,12 @@ barrios <- c(
 )
 barrios <- c("valdivia-de-los-rios")
 barrios <- c("plaza-nunoa-santiago-metropolitana")
+barrios <- c("coquimbo-coquimbo")
 
 tipos <- c("departamento")
+tipos <- c("casa")
 tipos <- c("departamento", "casa")
+ventas <- c(T)
 ventas <- c(T,F)
 
 # Datos Terreno Aysen
