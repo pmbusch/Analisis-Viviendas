@@ -6,7 +6,7 @@
 
 
 # Funcion para scrap un barrio completo. Tipo puede ser:departamento, casa
-f.scrap.barrio <- function(barrio,venta=True,tipo_vivienda){
+f.scrap.barrio <- function(barrio,venta=TRUE,tipo_vivienda){
   
   # Seleccionar venta o arriendo
   venta_arriendo <- if (venta) 'venta' else 'arriendo'
@@ -25,8 +25,9 @@ f.scrap.barrio <- function(barrio,venta=True,tipo_vivienda){
   
   # Navegar por la estructura html de la pagina, y extraer la informacion necesaria!
   # Obtenemos el total de resultados
-  total_viv <- html_node(web,'#inner-main > aside > div.quantity-results') %>% 
+  total_viv <- html_node(web,'#root-app > div > div > aside > div.ui-search-sidebar__result-container > div > span') %>% 
     html_text() %>% str_trim() %>% str_remove(" resultados") %>% as.numeric()
+  
   # 50 resultados por pagina
   total_paginas <- floor(total_viv/50)+1
   
@@ -64,12 +65,13 @@ f.scrap.barrio <- function(barrio,venta=True,tipo_vivienda){
     web <- read_html(sprintf(url,venta_arriendo,tipo_vivienda,barrio,50*(i-1)+1))
     
     #Obtenemos la direccion URL de cada aviso
-    dir_url <- html_nodes(web, xpath = '//div/div/div/a[1]') %>% 
+    dir_url <- html_nodes(web,xpath='//*[@id="root-app"]/div/div/section/ol/li/div/div/a[1]') %>% 
       html_attr('href')
     # filtro url con portalinmobiliario
     dir_url <- dir_url[str_detect(dir_url, "https://www.portalinmobiliario.com")]
     # remuevo proyectos, los cuales en su URL tienen [BB:1] al final
     dir_url <- dir_url[!(str_detect(dir_url,"BB:[1-9]"))]
+    
     
     for (url_depto in dir_url){
       tryCatch(

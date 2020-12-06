@@ -3,9 +3,9 @@
 
 # Imprimir reporte individual
 rmarkdown::render("Reporte_Viviendas.Rmd",
-                  params = list(viv = "casa",
-                                barrio="Coquimbo"),
-                  output_file = paste("Reportes/Reporte", "Coquimbo","casa", sep="_"))
+                  params = list(viv = "departamento",
+                                barrio="Valdivia"),
+                  output_file = paste("Reportes/Reporte", "Valdivia","depto","5Dic2020", sep="_"))
 
 
 # Valores que se usarán como "parámetros" (variables) del reporte

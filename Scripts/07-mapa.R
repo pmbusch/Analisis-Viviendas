@@ -26,8 +26,9 @@
 
 # Filtro outliers para generar el mapa
 ## Fuente: https://ropensci.github.io/CoordinateCleaner/articles/Tutorial_geographic_outliers.html
-df_mapa <- CoordinateCleaner::cc_outl(df, lon="longitud", lat="latitud", species = "barrio", method = "quantile")
-
+df_clean <- df %>% filter(!is.na(latitud))
+df_mapa <- CoordinateCleaner::cc_outl(df_clean, lon="longitud", lat="latitud", species = "barrio", method = "quantile")
+rm(df_clean)
 # location <- c(min(df_mapa$longitud), min(df_mapa$latitud), 
 #               max(df_mapa$longitud), max(df_mapa$latitud))
 
