@@ -9,6 +9,7 @@ output:
 params:
   barrio: "PlazaÑuñoa"
   viv: "departamento"
+  ven: !r "venta"
 ---
 
 ```{r opciones de cada chunk de código, echo=FALSE}
@@ -24,6 +25,7 @@ source("Scripts/00-CargaLibrerias.R", encoding = "UTF-8")
 # esto facilita la imrpesion masiva
 barrio <- params$barrio %>% as.character()
 viv <- params$viv %>% as.character()
+ven <- params$ven %>% as.character()
 source("Scripts/04-load_data.R", encoding = "UTF-8")
 ```
 
@@ -63,7 +65,7 @@ options(digits = 1, OutDec = ".")
 ```{r tabla precio, ft.top=1.25}
 tabla_precio %>% 
   flextable() %>% 
-  colformat_num(big.mark=" ", digits=0, j=colnames(tabla_precio)[2:5]) %>% 
+  colformat_double(big.mark=" ", digits=0, j=colnames(tabla_precio)[2:5]) %>% 
   fontsize(size = 14, part = "all") %>% 
   bold(j=1, bold=T) %>% bold(bold=T, part="header") %>% 
   autofit(add_w = 0.3, add_h = 0.1)
@@ -72,7 +74,7 @@ tabla_precio %>%
 ```{r tabla precioUF, ft.top=4.25}
 tabla_precioUF %>%  
   flextable() %>% 
-  colformat_num(big.mark=" ", digits=0, j=colnames(tabla_precio)[2:5]) %>% 
+  colformat_double(big.mark=" ", digits=0, j=colnames(tabla_precio)[2:5]) %>% 
   fontsize(size = 14, part = "all") %>% 
   bold(j=1, bold=T) %>% bold(bold=T, part="header") %>% 
   autofit(add_w = 0.3, add_h = 0.1)
@@ -82,7 +84,7 @@ tabla_precioUF %>%
 ```{r tabla superficie}
 tabla_sup %>% 
   flextable() %>% 
-  colformat_num(big.mark=" ", digits=0, j=colnames(tabla_sup)[2:5]) %>%
+  colformat_double(big.mark=" ", digits=0, j=colnames(tabla_sup)[2:5]) %>%
   fontsize(size = 14, part = "all") %>% 
   bold(j=1, bold=T) %>% bold(bold=T, part="header") %>% 
   autofit(add_w = 0.3, add_h = 0.15)
@@ -92,7 +94,7 @@ tabla_sup %>%
 ```{r tabla precio area}
 tabla_preciosup %>% 
   flextable() %>% 
-  colformat_num(big.mark=" ", digits=0, j=colnames(tabla_preciosup)[2:5]) %>%
+  colformat_double(big.mark=" ", digits=0, j=colnames(tabla_preciosup)[2:5]) %>%
   fontsize(size = 14, part = "all") %>% 
   bold(j=1, bold=T) %>% bold(bold=T, part="header") %>% 
   autofit(add_w = 0.3, add_h = 0.15)
