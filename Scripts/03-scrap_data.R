@@ -48,25 +48,33 @@ barrios <- c(
   "providencia-metropolitana"
 )
 barrios <- c("valdivia-de-los-rios")
-barrios <- c("plaza-nunoa-santiago-metropolitana")
-barrios <- c("coquimbo-coquimbo")
+# barrios <- c("plaza-nunoa-santiago-metropolitana")
+# barrios <- c("coquimbo-coquimbo")
+
+# Alonso
+barrios <- c(
+  "plaza-nunoa-santiago-metropolitana",
+  "barrio-lastarria-santiago-santiago-metropolitana",
+  "providencia-metropolitana")
+
 
 tipos <- c("departamento")
 tipos <- c("casa")
 tipos <- c("departamento", "casa")
 ventas <- c(T)
 ventas <- c(T,F)
+ventas <- c(F)
 
 # Datos Terreno Aysen
-tipos <- c("sitio", "parcela", "terreno-en-construccion")
-barrios <- c("aysen-aysen",
-             "coyhaique-aysen",
-             "chile-chico-aysen",
-             "cochrane-aysen",
-             "cisnes-aysen",
-             "tortel-aysen",
-             "rio-ibanez-aysen")
-ventas <- c(T)
+# tipos <- c("sitio", "parcela", "terreno-en-construccion")
+# barrios <- c("aysen-aysen",
+#              "coyhaique-aysen",
+#              "chile-chico-aysen",
+#              "cochrane-aysen",
+#              "cisnes-aysen",
+#              "tortel-aysen",
+#              "rio-ibanez-aysen")
+# ventas <- c(T)
 
 
 for (v in ventas){

@@ -13,6 +13,8 @@ spec(df)
 # Tipo de viviendas definido en el reporte como params
 df <- df %>% filter(tipo_vivienda %in% viv)
 
+# Filtrar datos a venta o arriendo
+df <- df %>% filter(venta_arriendo %in% ven)
 
 
 if (barrio!="NA"){
@@ -21,7 +23,9 @@ if (barrio!="NA"){
     ~barrio_nom, ~codigo_barrio,
     "PlazaÑuñoa", "plaza-nunoa-santiago-metropolitana", 
     "Valdivia","valdivia-de-los-rios",
-    "Coquimbo","coquimbo-coquimbo")
+    "Coquimbo","coquimbo-coquimbo",
+    "Lastarria","barrio-lastarria-santiago-santiago-metropolitana",
+    "Providencia","providencia-metropolitana")
   
   
   codigo_barrio <- dicc_barrios %>% filter(barrio_nom==barrio) %>% pull(codigo_barrio)
