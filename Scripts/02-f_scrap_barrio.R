@@ -26,7 +26,8 @@ f.scrap.barrio <- function(barrio,venta=TRUE,tipo_vivienda){
   # Navegar por la estructura html de la pagina, y extraer la informacion necesaria!
   # Obtenemos el total de resultados
   total_viv <- html_node(web,'#root-app > div > div > aside > div.ui-search-sidebar__result-container > div > span') %>% 
-    html_text() %>% str_trim() %>% str_remove(" resultados") %>% as.numeric()
+    html_text() %>% str_trim() %>% str_remove(" resultados") %>%
+    str_remove("\\.") %>% as.numeric()
   
   # 50 resultados por pagina
   total_paginas <- floor(total_viv/50)+1
