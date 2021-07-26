@@ -49,13 +49,18 @@ barrios <- c(
 )
 barrios <- c("valdivia-de-los-rios")
 # barrios <- c("plaza-nunoa-santiago-metropolitana")
+
+# Cristian Budinich
 # barrios <- c("coquimbo-coquimbo")
 
+# Paula Flores
+barrios <- c("la-serena-coquimbo")
+
 # Alonso
-barrios <- c(
-  "plaza-nunoa-santiago-metropolitana",
-  "barrio-lastarria-santiago-santiago-metropolitana",
-  "providencia-metropolitana")
+# barrios <- c(
+#   "plaza-nunoa-santiago-metropolitana",
+#   "barrio-lastarria-santiago-santiago-metropolitana",
+#   "providencia-metropolitana")
 
 
 tipos <- c("departamento")

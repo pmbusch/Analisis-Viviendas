@@ -14,7 +14,7 @@ f.scrap.barrio <- function(barrio,venta=TRUE,tipo_vivienda){
   
   # Crear el string URL de la pagina a scrapear
   url <- 'https://www.portalinmobiliario.com/%s/%s/propiedades-usadas/%s/_Desde_%s'
-  
+
   dir_portal <- 'https://www.portalinmobiliario.com'
   
   # sprintf permite crear un string tipo, y despues reemplazar los %s a gusto! Muy util para crear un codigo que Scrapee varios barrios a la vez!

@@ -42,38 +42,39 @@ rmarkdown::render("Reporte_Terrenos.Rmd",
 cols_type <- "cccdddDddddddccddDccc"
 file_name <- "Data/DataReporte - ValdiviaMar2021.csv"
 file_name <- "Data/DataReporte - Alonso Marzo2021.csv"
-df <- read_delim(file_name, delim = ";", skip = 1, na = c("NA"),
+file_name <- "Data/DataReporte - LaSerenaJulio2021.csv"
+df <- read_delim(file_name, delim = ",", skip = 0, na = c("NA"),
                  col_types = cols_type)
 rm(cols_type)
 
 
 
 p1 <- df %>% 
-  filter(venta_arriendo=="venta",
+  filter(venta_arriendo=="arriendo",
          banos<4, dorm<4) %>% 
   mutate(tipo_vivienda=factor(tipo_vivienda),
-         precio_millones=precio/1e6,
+         precio_miles=precio/1e3,
          Dorms_Banos=paste0(dorm,"D-",banos,"B"),
-         codigo=as.character(codigo),
+         url=as.character(dir_url),
          barrio_nuevo=barrio %>% 
            str_remove_all("santiago|metropolitana") %>% 
            str_remove_all("--|---") %>% str_replace("-"," ")) %>% 
-  ggplot(aes(sup,precio_millones,
-             # col=tipo_vivienda,
-             col=barrio_nuevo,
+  ggplot(aes(sup,precio_miles,
+             col=tipo_vivienda,
+             # col=barrio_nuevo,
              label=Dorms_Banos,text=nombre))+
   facet_wrap(~barrio_nuevo)+
   geom_point(alpha=.5)+
   xlab("Superficie Interior [metros cuadrados]")+
-  ylab("$ Precio en millones ")+
+  ylab("$ Precio en miles CLP ")+
   scale_y_continuous(labels=function(x) format(x,big.mark = " ", decimal.mark = ".", scientific = F))+
   theme_bw(20)+
-  ylim(0,300)+xlim(0,250)+
-  theme(legend.title = element_blank(), legend.position = "none") 
+  ylim(0,1000)+xlim(0,200)
+  # theme(legend.title = element_blank(), legend.position = "none") 
 p1
 
 library(plotly)
 p <- ggplotly(p1)
 
-htmlwidgets::saveWidget(as_widget(p), "ViviendasAlonso.html")
+htmlwidgets::saveWidget(as_widget(p), "ViviendasLaSerenaArriendo.html")
 # EoF
